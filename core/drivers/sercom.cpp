@@ -2,7 +2,7 @@
  * sercom.cpp
  *
  * Created: 23.9.2015 17:18:53
- * Revised: 30.4.2019
+ * Revised: 1.5.2019
  * Author: uidm2956
  * BOARD: 
  * ABOUT:
@@ -22,34 +22,32 @@ namespace Core::Drivers
         
         if (m_pSercom == SERCOM0)
         {
-            GCLK->PCHCTRL[SERCOM0_GCLK_ID_CORE].reg = unGeneratorNum|GCLK_PCHCTRL_CHEN;
-            MCLK->APBCMASK.bit.SERCOM0_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM0_GCLK_ID_CORE;
         }
         else if (m_pSercom == SERCOM1)
         {
-            GCLK->PCHCTRL[SERCOM1_GCLK_ID_CORE].reg = unGeneratorNum|GCLK_PCHCTRL_CHEN;
-            MCLK->APBCMASK.bit.SERCOM1_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM1_GCLK_ID_CORE;
         }
         else if (m_pSercom == SERCOM2)
         {
-            GCLK->PCHCTRL[SERCOM2_GCLK_ID_CORE].reg = unGeneratorNum|GCLK_PCHCTRL_CHEN;
-            MCLK->APBCMASK.bit.SERCOM2_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM2_GCLK_ID_CORE;
         }
         else if (m_pSercom == SERCOM3)
         {
-            GCLK->PCHCTRL[SERCOM3_GCLK_ID_CORE].reg = unGeneratorNum|GCLK_PCHCTRL_CHEN;
-            MCLK->APBCMASK.bit.SERCOM3_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM3_GCLK_ID_CORE;
         }
+        #ifdef SERCOM4
         else if (m_pSercom == SERCOM4)
         {
-            GCLK->PCHCTRL[SERCOM4_GCLK_ID_CORE].reg = unGeneratorNum|GCLK_PCHCTRL_CHEN;
-            MCLK->APBCMASK.bit.SERCOM4_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM4_GCLK_ID_CORE;
         }
+        #endif
+        #ifdef SERCOM5
         else if (m_pSercom == SERCOM5)
         {
-            GCLK->PCHCTRL[SERCOM5_GCLK_ID_CORE].reg = unGeneratorNum|GCLK_PCHCTRL_CHEN;
-            MCLK->APBCMASK.bit.SERCOM5_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM5_GCLK_ID_CORE;
         }
+        #endif
     }
     
     /************************************************************************/
@@ -174,7 +172,6 @@ namespace Core::Drivers
         /* Stop communication */
         m_pSercom->I2CM.CTRLB.bit.CMD = I2C_CMD_Stop;
     }
-
     
     uint8_t I2C::Read()
     {
@@ -208,7 +205,6 @@ namespace Core::Drivers
         /* Stop communication */
         m_pSercom->I2CM.CTRLB.bit.CMD = I2C_CMD_Stop;
     }
-
     
     void I2C::Read(uint8_t* aData, uint16_t unLength)
     {
