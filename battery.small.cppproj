@@ -188,7 +188,9 @@
     <Folder Include="core\device_startup" />
     <Folder Include="core\extensions" />
     <Folder Include="core\events" />
+    <Folder Include="core\extensions\buttons" />
     <Folder Include="core\modules" />
+    <Folder Include="core\modules\battery_management" />
     <Folder Include="core\multitask" />
     <Folder Include="core\tasks" />
   </ItemGroup>
@@ -221,6 +223,36 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="core\drivers\adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\drivers\eic.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\drivers\eic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\drivers\mux.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\drivers\mux.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\drivers\sercom.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\drivers\sercom.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\extensions\buttons\buttons.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\extensions\buttons\buttons.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\modules\battery_management\battery_management.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\modules\battery_management\battery_management.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="core\multitask\multitask.cpp">
