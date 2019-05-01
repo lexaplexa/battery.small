@@ -2,7 +2,7 @@
  * adc.cpp
  *
  * Created: 28.04.2019 15:50:42
- * Revised: 
+ * Revised: 1.5.2019
  * Author: LeXa
  * BOARD:
  *
