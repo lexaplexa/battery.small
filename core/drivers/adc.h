@@ -2,7 +2,7 @@
  * adc.h
  *
  * Created: 28.4.2019 15:51:28
- * Revised: 
+ * Revised: 1.5.2019
  * Author: LeXa
  * BOARD:
  *
@@ -89,6 +89,20 @@ namespace Core
             ADC_MUXNEG_GND = 0x18,  /* Internal ground */
             ADC_MUXNEG_IOGND,       /* I/O ground */
         };
+        
+        enum ADC_AVERAGE_SAMPLE_enum {
+            ADC_AVERAGE_SAMPLE_1,
+            ADC_AVERAGE_SAMPLE_2,
+            ADC_AVERAGE_SAMPLE_4,
+            ADC_AVERAGE_SAMPLE_8,
+            ADC_AVERAGE_SAMPLE_16,
+            ADC_AVERAGE_SAMPLE_32,
+            ADC_AVERAGE_SAMPLE_64,
+            ADC_AVERAGE_SAMPLE_128,
+            ADC_AVERAGE_SAMPLE_256,
+            ADC_AVERAGE_SAMPLE_512,
+            ADC_AVERAGE_SAMPLE_1024,
+        };
 
         class ADC_DRIVER
         {
@@ -136,6 +150,16 @@ namespace Core
                  * \return uint16_t         - ADC result
                  */
                 virtual uint16_t Convert(ADC_MUXPOS_enum ePos, ADC_MUXNEG_enum eNeg);
+                
+                /**
+                 * \brief   Convert voltage with more samples
+                 * 
+                 * \param ePos              - positive position
+                 * \param eSamples          - number of samples
+                 * 
+                 * \return uint16_t         - average ADC result
+                 */
+                virtual uint16_t AverageConvert(ADC_MUXPOS_enum ePos, ADC_AVERAGE_SAMPLE_enum eSamples);
         };
     }
 }

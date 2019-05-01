@@ -58,4 +58,21 @@ namespace Core::Drivers
         return ADC->RESULT.bit.RESULT;
     }
 
+    uint16_t ADC_DRIVER::AverageConvert(ADC_MUXPOS_enum ePos, ADC_AVERAGE_SAMPLE_enum eSamples)
+    {
+        ADC->INTFLAG.bit.RESRDY = 1;     /* Clear Flag before conversion */
+        ADC->CTRLB.bit.DIFFMODE = false;
+        ADC->INPUTCTRL.bit.MUXPOS = ePos;
+        ADC->INPUTCTRL.bit.MUXNEG = ADC_MUXNEG_IOGND;
+        ADC->AVGCTRL.bit.SAMPLENUM = eSamples;
+        if (eSamples == ADC_AVERAGE_SAMPLE_1) {ADC->AVGCTRL.bit.ADJRES = 0;}
+        else if (eSamples == ADC_AVERAGE_SAMPLE_2) {ADC->AVGCTRL.bit.ADJRES = 1;}
+        else if (eSamples == ADC_AVERAGE_SAMPLE_4) {ADC->AVGCTRL.bit.ADJRES = 2;}
+        else if (eSamples == ADC_AVERAGE_SAMPLE_8) {ADC->AVGCTRL.bit.ADJRES = 3;}
+        else{ADC->AVGCTRL.bit.ADJRES = 4;}
+        ADC->SWTRIG.bit.START = true;
+        while(!ADC->INTFLAG.bit.RESRDY);
+        return ADC->RESULT.bit.RESULT;
+    }
+
 }
