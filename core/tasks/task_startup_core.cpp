@@ -13,111 +13,71 @@
 #include <core/core.h>
 #include <core/drivers/adc.h>
 
-#define VOUT_EN_pin             PORT_PA14
-#define VIN_EN_pin              PORT_PA11
-#define LOW_POWER_pin           PORT_PA28
-#define VCELL1_pin              PORT_PA04
-#define VCELL2_pin              PORT_PA05
-
-#define vout_on()               REG_PORT_OUTCLR0 = VOUT_EN_pin;
-#define vout_off()              REG_PORT_OUTSET0 = VOUT_EN_pin;
-#define vin_on()                REG_PORT_OUTCLR0 = VIN_EN_pin;
-#define vin_off()               REG_PORT_OUTSET0 = VIN_EN_pin;
-#define low_power_on()          REG_PORT_OUTCLR0 = LOW_POWER_pin;
-#define low_power_off()         REG_PORT_OUTSET0 = LOW_POWER_pin;
-
-#define OVERVOLTAGE_CUTOFF      4.2f
-#define UNDERVOLTAGE_CUTOFF     3.0f
-
 using namespace Core::Drivers;
-ADC_DRIVER cAdc(0);
-uint16_t res[7];
-float resf[7];
-
-void test()
-{
-    
-    res[0] = cAdc.Convert(ADC_MUXPOS_AIN4);
-    res[1] = cAdc.Convert(ADC_MUXPOS_AIN5);
-    res[2] = cAdc.Convert(ADC_MUXPOS_AIN6);
-    res[3] = cAdc.Convert(ADC_MUXPOS_AIN7);
-    res[4] = cAdc.Convert(ADC_MUXPOS_AIN16);
-    res[5] = cAdc.Convert(ADC_MUXPOS_AIN17);
-    res[6] = cAdc.Convert(ADC_MUXPOS_AIN18);
-    
-    for (uint8_t i=0; i<7; i++)
-    {
-        resf[i] = float(res[i])*0.992/4096*31;
-    }
-    
-    resf[6] -= resf[5];
-    resf[5] -= resf[4];
-    resf[4] -= resf[3];
-    resf[3] -= resf[2];
-    resf[2] -= resf[1];
-    resf[1] -= resf[0];
-    
-    /* Over voltage detection */
-    for (uint8_t i=0; i<7; i++)
-    {
-        if (resf[i] > OVERVOLTAGE_CUTOFF) 
-        {
-            vin_off();
-            vout_on();
-            break;
-        }
-    }
-    
-    /* Enable charging after over voltage cutoff */
-    bool bVinOn = true;
-    for (uint8_t i=0; i<7; i++)
-    {
-        if (resf[i] > 4.0f)
-        {
-            bVinOn = false;
-            break;
-        }
-    }
-    if (bVinOn) {vin_on();}
-    
-    /* Under voltage detection */
-    for (uint8_t i=0; i<7; i++)
-    {
-        if (resf[i] < UNDERVOLTAGE_CUTOFF)
-        {
-            vout_off();
-            low_power_on();
-            break;
-        }
-    }
-    
-    /* Enable discharging after under voltage */
-    bool bVoutOn = true;
-    for (uint8_t i=0; i<7; i++)
-    {
-        if (resf[i] < 3.2f)
-        {
-            bVoutOn = false;
-            break;
-        }
-    }
-    if (bVoutOn) {vout_on(); low_power_off();}
-}
+using namespace Core::Extensions;
+using namespace Core::Modules;
+using namespace Core::Multitask;
+void taskCellTest();
+uint16_t res;
 
 void Core::Multitask::taskStartUpCore()
 {    
     vout_off();
     vin_off();
     low_power_on();
-    REG_PORT_DIR0 = VOUT_EN_pin|VIN_EN_pin|LOW_POWER_pin;
+    REG_PORT_DIRSET0 = VOUT_EN_msk|VIN_EN_msk|LOW_POWER_msk;
     
     Core::Multitask::MTASK::EnableDeepSleep();
-    Core::Multitask::MTASK::Repeat(test,TASK_TOUT_MS(500));
     
-    PORT->Group[0].PMUX[2].reg = MUX_PA04B_ADC_AIN4|MUX_PA05B_ADC_AIN5<<4;
-    PORT->Group[0].PMUX[3].reg = MUX_PA06B_ADC_AIN6|MUX_PA07B_ADC_AIN7<<4;
-    PORT->Group[0].PMUX[4].reg = MUX_PA08B_ADC_AIN16|MUX_PA09B_ADC_AIN17<<4;
-    PORT->Group[0].PMUX[5].reg = MUX_PA10B_ADC_AIN18;
+    /* ADC channels initialization */
+    MUX::SetPinGroup(&PORTA, VCELL1_msk|VCELL2_msk|VCELL3_msk|VCELL4_msk|VCELL5_msk|VCELL6_msk|VCELL7_msk, VCELL1_pinmux);
+    BATTERY_MANAGEMENT::Init(ADC_PRESCALER_DIV64, ADC_RESOLUTION_12BIT, ADC_REFERENCE_INT1V, 1.01f);
     
-    cAdc.Init(ADC_PRESCALER_DIV64, ADC_RESOLUTION_12BIT, ADC_REFERENCE_INT1V, 1.01f);
+    /* Buttons initialization */
+    REG_PORT_OUTSET0 = BUTTON_LEFT_msk|BUTTON_RIGHT_msk;        /* Pull-up */
+    MUX::SetPinGroup(&PORTA, BUTTON_LEFT_msk|BUTTON_RIGHT_msk, BUTTON_LEFT_pinmux, PORT_PINCFG_PMUXEN|PORT_PINCFG_PULLEN|PORT_PINCFG_INEN);    
+    EXTINT::Enable(0);
+    EXTINT::SetExtInt(BUTTON_LEFT_extint, EIC_SENSE_Fall);
+    EXTINT::SetExtInt(BUTTON_RIGHT_extint, EIC_SENSE_Fall);
+    NVIC_EnableIRQ(EIC_IRQn);
+    
+    /* Display initialization */
+    MUX::SetPinGroup(&PORTA, DISP_SCL_msk|DISP_SDA_msk, DISP_SCL_pinmux);
+    
+    /* Run application */
+    MTASK::Run(taskStartUpApp);
+    
+    /* Tests */
+    MTASK::Repeat(taskCellTest, TASK_TOUT_MS(100));
+}
+
+void taskCellTest()
+{
+    BATTERY_MANAGEMENT::MeasCells();
+    //BATTERY_MANAGEMENT::CheckCells();
+    res = BATTERY_MANAGEMENT::GetCellVoltage(1);
+    res = BATTERY_MANAGEMENT::GetCellVoltage(2);
+    res = BATTERY_MANAGEMENT::GetCellVoltage(3);
+    res = BATTERY_MANAGEMENT::GetCellVoltage(4);
+    res = BATTERY_MANAGEMENT::GetCellVoltage(5);
+    res = BATTERY_MANAGEMENT::GetCellVoltage(6);
+    res = BATTERY_MANAGEMENT::GetCellVoltage(7);
+}
+
+
+/************************************************************************/
+/* INTERRUPT HANDLERS                                                   */
+/************************************************************************/
+void EIC_Handler()
+{
+    if (REG_EIC_INTFLAG & (1<<BUTTON_LEFT_extint))
+    {
+        if(BUTTONS::GetEvent(BUTTONS_EVENT_PushEnter) != 0) {MTASK::Run((FuncPtr_t)BUTTONS::GetEvent(BUTTONS_EVENT_PushEnter));}
+    }
+    if (REG_EIC_INTFLAG & (1<<BUTTON_RIGHT_extint))
+    {
+        if(BUTTONS::GetEvent(BUTTONS_EVENT_PushNext) != 0) {MTASK::Run((FuncPtr_t)BUTTONS::GetEvent(BUTTONS_EVENT_PushNext));}
+    }
+    
+    EIC->INTFLAG.reg = 0xFFFFFFFF;      /* Clear flags */
 }
