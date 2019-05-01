@@ -1,8 +1,8 @@
 /*************************************************************************
  * core.h
  *
- * Created: 28.11.2019 10:19:52
- * Revised: 
+ * Created: 28.4.2019 10:19:52
+ * Revised: 1.5.2019
  * Author: LeXa
  * BOARD:
  *
@@ -16,6 +16,15 @@
 #include <conf/conf_board.h>
 
 #include <core/multitask/multitask.h>
+
+#include <core/drivers/adc.h>
+#include <core/drivers/eic.h>
+#include <core/drivers/mux.h>
+#include <core/drivers/sercom.h>
+
+#include <core/extensions/buttons/buttons.h>
+
+#include <core/modules/battery_management/battery_management.h>
 
 #include <core/coreversion.h>
 #include <app/appversion.h>
