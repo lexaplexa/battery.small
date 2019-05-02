@@ -2,7 +2,7 @@
  * sercom.cpp
  *
  * Created: 23.9.2015 17:18:53
- * Revised: 1.5.2019
+ * Revised: 2.5.2019
  * Author: uidm2956
  * BOARD: 
  * ABOUT:
@@ -22,29 +22,35 @@ namespace Core::Drivers
         
         if (m_pSercom == SERCOM0)
         {
+            PM->APBCMASK.bit.SERCOM0_ = true;
             GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM0_GCLK_ID_CORE;
         }
         else if (m_pSercom == SERCOM1)
         {
-            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM1_GCLK_ID_CORE;
+            PM->APBCMASK.bit.SERCOM1_ = true;
+            GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM1_GCLK_ID_CORE;            
         }
         else if (m_pSercom == SERCOM2)
         {
+            PM->APBCMASK.bit.SERCOM2_ = true;
             GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM2_GCLK_ID_CORE;
         }
         else if (m_pSercom == SERCOM3)
         {
+            PM->APBCMASK.bit.SERCOM3_ = true;
             GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM3_GCLK_ID_CORE;
         }
         #ifdef SERCOM4
         else if (m_pSercom == SERCOM4)
         {
+            PM->APBCMASK.bit.SERCOM4_ = true;
             GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM4_GCLK_ID_CORE;
         }
         #endif
         #ifdef SERCOM5
         else if (m_pSercom == SERCOM5)
         {
+            PM->APBCMASK.bit.SERCOM5_ = true;
             GCLK->CLKCTRL.reg = GCLK_CLKCTRL_CLKEN|GCLK_CLKCTRL_GEN(unGeneratorNum)|SERCOM5_GCLK_ID_CORE;
         }
         #endif
@@ -149,7 +155,7 @@ namespace Core::Drivers
 
         m_pSercom->I2CM.CTRLA.bit.MODE = 0x05;              /* I2C master operation */
         m_pSercom->I2CM.CTRLA.bit.INACTOUT = 0x03;
-        m_pSercom->I2CM.BAUD.reg = unFgen/2/(unBaud+1);
+        m_pSercom->I2CM.BAUD.bit.BAUD = unFgen/(2*unBaud)-1;
 
         m_pSercom->I2CM.CTRLA.bit.ENABLE = true;
         while (m_pSercom->I2CM.SYNCBUSY.bit.ENABLE);
