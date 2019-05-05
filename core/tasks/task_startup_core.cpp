@@ -11,7 +11,7 @@
  *************************************************************************/
 
 #include <core/core.h>
-#include <core/extensions/display/ssd1306.h>
+
 
 using namespace Core::Drivers;
 using namespace Core::Extensions;
@@ -54,7 +54,8 @@ void Core::Multitask::taskStartUpCore()
     SSD1306::On();    
     SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;", 0, 0);
     SSD1306::Println((uint8_t*)"<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 0);
-    SSD1306::Println((uint8_t*)"[\]^_`abcdefghijklmnopqrstuvwxyz", 2, 0);
+    SSD1306::Println((uint8_t*)"[\\]^_`abcdefghijklmnopqrstuvwxyz", 3, 0);
+    SSD1306::WriteCmd(SSD1306_INVERTDISPLAY);
 }
 
 void taskCellTest()

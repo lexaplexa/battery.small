@@ -34,70 +34,70 @@ const Core::Extensions::SSD1306_PICTURE_struct ascii_2C = {.unByteSize=2, .unRow
 const Core::Extensions::SSD1306_PICTURE_struct ascii_2D = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x08,0x08,0x08,0x00}};
 const Core::Extensions::SSD1306_PICTURE_struct ascii_2E = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x40,0x00,0x00,0x00}};
 const Core::Extensions::SSD1306_PICTURE_struct ascii_2F = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x40,0x30,0x0C,0x03}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_30 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_31 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_32 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_33 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_34 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_35 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_36 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_37 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_38 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_39 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_3A = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_3B = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_3C = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_3D = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_3E = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_3F = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_40 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_41 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_42 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_43 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_44 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_45 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_46 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_47 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_48 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_49 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_4A = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_4B = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_4C = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_4D = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_4E = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_4F = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_50 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_51 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_52 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_53 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_54 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_55 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_56 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_57 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_58 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_59 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_5A = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_5B = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_5C = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_5D = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_5E = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_5F = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_60 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_61 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_62 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_63 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_64 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_65 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_66 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_67 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_68 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_69 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_6A = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_6B = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_6C = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_6D = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_6E = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
-const Core::Extensions::SSD1306_PICTURE_struct ascii_6F = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_30 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x3E,0x41,0x41,0x3E}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_31 = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x04,0x02,0x7F,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_32 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x62,0x51,0x49,0x46}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_33 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x22,0x41,0x49,0x36}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_34 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x18,0x14,0x12,0x7F,0x10,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_35 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x27,0x45,0x45,0x39}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_36 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x3E,0x49,0x49,0x32}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_37 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x01,0x61,0x19,0x07}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_38 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x36,0x49,0x49,0x36}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_39 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x26,0x49,0x49,0x3E}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_3A = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x28,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_3B = {.unByteSize=2, .unRows=8, .unColumns=2, .aData={0x40,0x28,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_3C = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x08,0x14,0x22,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_3D = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x14,0x14,0x14,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_3E = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x22,0x14,0x08,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_3F = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x06,0x01,0x59,0x06}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_40 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x3C,0x42,0x59,0x55,0x4E,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_41 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7E,0x11,0x11,0x7E}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_42 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x49,0x49,0x36}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_43 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x3E,0x41,0x41,0x22}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_44 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x41,0x41,0x3E}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_45 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x49,0x49,0x41}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_46 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x09,0x09,0x01}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_47 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x3E,0x41,0x49,0x32}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_48 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x08,0x08,0x7F}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_49 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x7F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_4A = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x21,0x41,0x41,0x3F}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_4B = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x08,0x14,0x63}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_4C = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x40,0x40,0x40}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_4D = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x7F,0x02,0x04,0x02,0x7F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_4E = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x7F,0x06,0x08,0x30,0x7F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_4F = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x3E,0x41,0x41,0x41,0x3E,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_50 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x09,0x09,0x06}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_51 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x3E,0x41,0x51,0x21,0x5E,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_52 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x19,0x29,0x46}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_53 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x26,0x49,0x49,0x32}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_54 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x01,0x01,0x7F,0x01,0x01,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_55 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x3F,0x40,0x40,0x40,0x3F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_56 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x0F,0x30,0x40,0x30,0x0F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_57 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x3F,0x40,0x3C,0x40,0x3F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_58 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x63,0x1C,0x1C,0x63}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_59 = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x07,0x08,0x70,0x08,0x07,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_5A = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x61,0x51,0x49,0x45,0x43,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_5B = {.unByteSize=2, .unRows=8, .unColumns=2, .aData={0x7F,0x41,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_5C = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x03,0x0C,0x30,0x40}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_5D = {.unByteSize=2, .unRows=8, .unColumns=2, .aData={0x41,0x7F,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_5E = {.unByteSize=5, .unRows=8, .unColumns=5, .aData={0x04,0x02,0x01,0x02,0x04,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_5F = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x08,0x08,0x08,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_60 = {.unByteSize=2, .unRows=8, .unColumns=2, .aData={0x01,0x02,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_61 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x30,0x4A,0x4A,0x7C}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_62 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x48,0x48,0x30}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_63 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x3C,0x42,0x42,0x24}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_64 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x30,0x48,0x48,0x7F}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_65 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x3C,0x4A,0x4A,0x24}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_66 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x08,0x7E,0x09,0x02}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_67 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x04,0x2A,0x4A,0x3C}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_68 = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7F,0x08,0x08,0x70}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_69 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x7A,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_6A = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x20,0x40,0x3A,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_6B = {.unByteSize=3, .unRows=8, .unColumns=3, .aData={0x7F,0x10,0x6C,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_6C = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x7F,0x00,0x00,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_6D = {.unByteSize=7, .unRows=8, .unColumns=7, .aData={0x7E,0x04,0x02,0x7E,0x04,0x02,0x7E,0x00}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_6E = {.unByteSize=4, .unRows=8, .unColumns=4, .aData={0x7E,0x04,0x02,0x7E}};
+const Core::Extensions::SSD1306_PICTURE_struct ascii_6F = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x3C,0x42,0x42,0x42}};
 const Core::Extensions::SSD1306_PICTURE_struct ascii_70 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
 const Core::Extensions::SSD1306_PICTURE_struct ascii_71 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
 const Core::Extensions::SSD1306_PICTURE_struct ascii_72 = {.unByteSize=1, .unRows=8, .unColumns=1, .aData={0x5F,0x00,0x00,0x00}};
@@ -338,25 +338,22 @@ void Core::Extensions::SSD1306::Println(uint8_t* pText, uint8_t unRow, uint8_t u
             unCol = unColStart;
             if (unRow >= SSD1306_LCDHEIGHT/8) {return;}         /* Outside display area */
         }
-        else if (*pText > '~') {continue;}
+        else if (*pText < ' ' || *pText > '~') {continue;}
         else
         {
-            for (uint8_t i=0; i<psChar->unByteSize; i++)
-            {
-                m_GDDRAM[unRow][unCol + i] = psChar->aData[i];
-            }
-            unCol += psChar->unColumns;
-            
-            if (unCol >= SSD1306_LCDWIDTH)
+            if ((unCol + psChar->unColumns) >= SSD1306_LCDWIDTH)
             {
                 unRow++;
                 unCol = unColStart;
                 if (unRow >= SSD1306_LCDHEIGHT/8) {return;}     /* Outside display area */
             }
-            else
+            
+            for (uint8_t i=0; i<psChar->unByteSize; i++)
             {
-                m_GDDRAM[unRow][unCol++] = 0x00;                /* Space 1px between characters */
+                m_GDDRAM[unRow][unCol + i] = psChar->aData[i];
             }
+            unCol += psChar->unColumns;
+            m_GDDRAM[unRow][unCol++] = 0x00;                /* Space 1px between characters */
         }
     }
     
