@@ -2,7 +2,7 @@
  * conf_board.h
  *
  * Created: 28.4.2019 10:21:04
- * Revised: 1.5.2018
+ * Revised: 5.5.2018
  * Author: LeXa
  * BOARD: 
  *
@@ -24,7 +24,7 @@
 /* SYSTEM CLOCK OPTIONS                                                 */
 /************************************************************************/
 #define CPU_FREQ                    SOURCE_FREQ*MULTIPLICATION_FREQ
-#define SOURCE_FREQ                 1000000
+#define SOURCE_FREQ                 8000000
 #define MULTIPLICATION_FREQ         1       /* Used only in DPLL */
 #define DPLL_CLKREF                 1       /* DPLL reference clock (0 - XOSC32K, 1 - XOSC, 2 - GCLK) */
 
@@ -87,6 +87,7 @@
 #define DISP_SCL_pin            PIN_PA17
 #define DISP_SCL_msk            PORT_PA17
 #define DISP_SCL_pinmux         MUX_PA17C_SERCOM1_PAD1
+#define DISP_SERCOM             SERCOM1
 
 /* BUTTONS */
 #define BUTTON_LEFT_pin         PIN_PA15

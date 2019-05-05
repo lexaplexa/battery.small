@@ -2,7 +2,7 @@
  * core.h
  *
  * Created: 28.4.2019 10:19:52
- * Revised: 1.5.2019
+ * Revised: 5.5.2019
  * Author: LeXa
  * BOARD:
  *
@@ -19,10 +19,12 @@
 
 #include <core/drivers/adc.h>
 #include <core/drivers/eic.h>
+#include <core/drivers/genclock.h>
 #include <core/drivers/mux.h>
 #include <core/drivers/sercom.h>
 
 #include <core/extensions/buttons/buttons.h>
+#include <core/extensions/display/ssd1306.h>
 
 #include <core/modules/battery_management/battery_management.h>
 
