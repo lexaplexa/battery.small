@@ -2,7 +2,7 @@
  * task_startup_core.cpp
  *
  * Created: 28.4.2019 10:20:59
- * Revised: 
+ * Revised: 5.5.2019
  * Author: uidm2956
  * BOARD:
  *
@@ -11,12 +11,13 @@
  *************************************************************************/
 
 #include <core/core.h>
-#include <core/drivers/adc.h>
+#include <core/extensions/display/ssd1306.h>
 
 using namespace Core::Drivers;
 using namespace Core::Extensions;
 using namespace Core::Modules;
 using namespace Core::Multitask;
+GENCLOCK cClockMain(0, CPU_FREQ, 1, GCLK_SOURCE_OSC8M);
 void taskCellTest();
 uint16_t res;
 
@@ -49,6 +50,11 @@ void Core::Multitask::taskStartUpCore()
     
     /* Tests */
     MTASK::Repeat(taskCellTest, TASK_TOUT_MS(100));
+    SSD1306::Init();
+    SSD1306::On();    
+    SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;", 0, 0);
+    SSD1306::Println((uint8_t*)"<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 0);
+    SSD1306::Println((uint8_t*)"[\]^_`abcdefghijklmnopqrstuvwxyz", 2, 0);
 }
 
 void taskCellTest()
