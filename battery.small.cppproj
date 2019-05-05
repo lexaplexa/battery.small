@@ -189,6 +189,7 @@
     <Folder Include="core\extensions" />
     <Folder Include="core\events" />
     <Folder Include="core\extensions\buttons" />
+    <Folder Include="core\extensions\display" />
     <Folder Include="core\modules" />
     <Folder Include="core\modules\battery_management" />
     <Folder Include="core\multitask" />
@@ -231,6 +232,9 @@
     <Compile Include="core\drivers\eic.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="core\drivers\genclock.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="core\drivers\mux.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -247,6 +251,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="core\extensions\buttons\buttons.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\extensions\display\ssd1306.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="core\extensions\display\ssd1306.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="core\modules\battery_management\battery_management.cpp">
