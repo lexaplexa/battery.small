@@ -52,10 +52,11 @@ void Core::Multitask::taskStartUpCore()
     MTASK::Repeat(taskCellTest, TASK_TOUT_MS(100));
     SSD1306::Init();
     SSD1306::On();    
-    SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;", 0, 0);
-    SSD1306::Println((uint8_t*)"<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 0);
-    SSD1306::Println((uint8_t*)"[\\]^_`abcdefghijklmnopqrstuvwxyz", 3, 0);
-    SSD1306::WriteCmd(SSD1306_INVERTDISPLAY);
+    //SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;", 0, 0, SSD1306_FONT_Small);
+    //SSD1306::Println((uint8_t*)"<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 0, SSD1306_FONT_Small);
+    //SSD1306::Println((uint8_t*)"[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", 3, 0, SSD1306_FONT_Small);
+    SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;",0,0,SSD1306_FONT_Large);
+    //SSD1306::WriteCmd(SSD1306_INVERTDISPLAY);
 }
 
 void taskCellTest()

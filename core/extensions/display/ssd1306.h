@@ -86,6 +86,11 @@
 #define SSD1306_VERTICAL_AND_RIGHT_HORIZONTAL_SCROLL    0x29
 #define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL     0x2A
 
+enum SSD1306_FONT_enum {
+    SSD1306_FONT_Small,
+    SSD1306_FONT_Large,
+    };
+
 namespace Core
 {
     namespace Extensions
@@ -106,6 +111,7 @@ namespace Core
             private:
             static uint8_t m_GDDRAM[SSD1306_LCDHEIGHT/8][SSD1306_LCDWIDTH];
             const static SSD1306_PICTURE_struct *m_font_small[];
+            const static SSD1306_PICTURE_struct *m_font_large[];
             
             public:
             /**
@@ -150,7 +156,7 @@ namespace Core
             *
             * \return void
             */
-            static void Println(uint8_t* pText, uint8_t unRow, uint8_t unCol);
+            static void Println(uint8_t* pText, uint8_t unRow, uint8_t unCol, SSD1306_FONT_enum eFont);
             
             /**
             * \brief   Set display on
