@@ -247,6 +247,9 @@
     <Compile Include="core\drivers\sercom.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="core\events\events.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="core\extensions\buttons\buttons.cpp">
       <SubType>compile</SubType>
     </Compile>
