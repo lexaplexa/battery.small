@@ -2,7 +2,7 @@
  * app.h
  *
  * Created: 28.4.2019 10:26:54
- * Revised: 
+ * Revised: 2.6.2019
  * Author: LeXa
  * BOARD:
  *
@@ -14,6 +14,7 @@
 #define APP_H_
 
 #include <core/core.h>
+#include <stdio.h>
 
 /************************************************************************/
 /* EXTERNAL VARIABLES                                                   */
