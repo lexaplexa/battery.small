@@ -143,7 +143,7 @@ void Core::Extensions::SSD1306::Println(uint8_t* pText, uint8_t unRow, uint8_t u
             unRow++;
             if (eFont == SSD1306_FONT_Large) {unRow++;}
             unCol = unColStart;
-            if (unRow >= SSD1306_LCDHEIGHT/8) {return;}         /* Outside display area */
+            if (unRow >= SSD1306_LCDHEIGHT/8) {break;}         /* Outside display area */
         }
         else if (*pText < ' ' || *pText > '~') {continue;}
         else
@@ -153,7 +153,7 @@ void Core::Extensions::SSD1306::Println(uint8_t* pText, uint8_t unRow, uint8_t u
                 unRow++;
                 if (eFont == SSD1306_FONT_Large) {unRow++;}
                 unCol = unColStart;
-                if (unRow >= SSD1306_LCDHEIGHT/8) {return;}     /* Outside display area */
+                if (unRow >= SSD1306_LCDHEIGHT/8) {break;}     /* Outside display area */
             }
             
             if (eFont == SSD1306_FONT_Small)
