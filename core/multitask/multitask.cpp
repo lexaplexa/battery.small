@@ -2,7 +2,7 @@
 * multitask.cpp
 *
 * Created: 31.3.2016 15:15:18
-* Revised: 28.4.2019
+* Revised: 22.5.2019
 * Author: uidm2956
 * BOARD:
 * ABOUT:
@@ -19,7 +19,8 @@ namespace Core::Multitask
     uint8_t MTASK::m_unActiveTasks = 0;
     uint8_t MTASK::m_unHighestPrio = 0;
     bool MTASK::m_bDeepSleepEnabled = false;
-    TASK_struct* MTASK::m_pFirstTask = nullptr;
+    bool MTASK::m_bSchedulerRunning = false;
+    TASK_struct* MTASK::m_psLastTask = nullptr;
     TASK_struct* MTASK::m_psCurrentTask = nullptr;
     FuncPtr_t MTASK::peventBeforeDeepSleep = nullptr;
     FuncPtr_t MTASK::peventAfterWakeUp = nullptr;
@@ -39,14 +40,14 @@ namespace Core::Multitask
         if (SysTimeOverflow)
         {
             m_unSysTime = 0;
-            for (TASK_struct* pTask = m_pFirstTask; pTask != nullptr; pTask = pTask->pNextTask)
+            for (TASK_struct* pTask = m_psLastTask; pTask != nullptr; pTask = pTask->psParent)
             {
                 pTask->nTimeMatch &= 0x7FFFFFFF;
             }
         }
     
         /* Increment time match if task suspended */
-        for (TASK_struct* pTask = m_pFirstTask; pTask != nullptr; pTask = pTask->pNextTask)
+        for (TASK_struct* pTask = m_psLastTask; pTask != nullptr; pTask = pTask->psParent)
         {
             if (pTask->bSuspend) {pTask->nTimeMatch++;}
         }
@@ -54,92 +55,76 @@ namespace Core::Multitask
     
     inline void MTASK::Schedule()
     {
-        /* Clear to default values */
-        m_unHighestPrio = 0;
-        m_unActiveTasks = 0;
-        m_psCurrentTask = nullptr;
-    
-        /* Find task with highest priority */
-        for (TASK_struct* pTask = m_pFirstTask; pTask != nullptr; pTask = pTask->pNextTask)
+        if (m_bSchedulerRunning) {return;}
+        m_bSchedulerRunning = true;
+
+        /* Main loop */
+        while (1)
         {
-            if (pTask->bSuspend == false) {m_unActiveTasks++;}
-            if (m_unSysTime >= pTask->nTimeMatch && pTask->unPriority >= m_unHighestPrio)
-            {
-                m_psCurrentTask = pTask;
-                m_unHighestPrio = pTask->unPriority;
-            }
-        }
-    
-        /* Run task if available */
-        if (m_psCurrentTask != nullptr)
-        {
-            FuncPtr_t pTaskFunc = m_psCurrentTask->pTaskFunc;
-            if (m_psCurrentTask->bRepeat) {m_psCurrentTask->nTimeMatch = m_unSysTime + m_psCurrentTask->unTimeOut;}
-            else {DeleteTask(m_psCurrentTask);}
-            /* Run task function */
-            pTaskFunc();
-        }
-        /* Controller can be put into deep sleep if no tasks are active.
-         * Multi task counter is not running. There are limited wake-up sources. */
-        else if (m_bDeepSleepEnabled && !m_unActiveTasks)
-        {
-            /* Run event before going to deep sleep */
-            if (peventBeforeDeepSleep != nullptr) {peventBeforeDeepSleep();}
+            /* Clear to default values */
+            m_unHighestPrio = 0;
+            m_unActiveTasks = 0;
+            m_psCurrentTask = nullptr;
             
-            #ifdef _SAMC21_ 
+            /* Find task with highest priority */
+            for (TASK_struct* pTask = m_psLastTask; pTask != nullptr; pTask = pTask->psParent)
+            {
+                if (pTask->bSuspend == false) {m_unActiveTasks++;}
+                if (m_unSysTime >= pTask->nTimeMatch && pTask->unPriority >= m_unHighestPrio)
+                {
+                    m_psCurrentTask = pTask;
+                    m_unHighestPrio = pTask->unPriority;
+                }
+            }
+            
+            /* Run task if available */
+            if (m_psCurrentTask != nullptr)
+            {
+                FuncPtr_t pTaskFunc = m_psCurrentTask->pTaskFunc;
+                if (m_psCurrentTask->bRepeat) {m_psCurrentTask->nTimeMatch = m_unSysTime + m_psCurrentTask->unTimeOut;}
+                else {DeleteTask(m_psCurrentTask);}
+                /* Run task function */
+                pTaskFunc();
+            }
+            /* Controller can be put into deep sleep if no tasks are active.
+            * Multi task counter is not running. There are limited wake-up sources. */
+            else if (m_bDeepSleepEnabled && !m_unActiveTasks)
+            {
+                /* Run event before going to deep sleep */
+                if (peventBeforeDeepSleep != nullptr) {peventBeforeDeepSleep();}
+                
+                #ifdef _SAMC21_
                 REG_PM_SLEEPCFG = PM_SLEEPCFG_SLEEPMODE_STANDBY;
-            #endif
-            #ifdef _SAMD21_
+                #endif
+                #ifdef _SAMD21_
                 SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-            #endif
-            __WFI();
-        
-            /* Run event after wake up */
-            if (peventAfterWakeUp != nullptr) {peventAfterWakeUp();}
-        }
-        /* If no task is executed, CPU is going to idle mode.
-         * Wait for next interrupt (tick or some other interrupt) */
-        else
-        {
-            #ifdef _SAMC21_ 
-                REG_PM_SLEEPCFG = PM_SLEEPCFG_SLEEPMODE_IDLE0;
-            #endif
-            #ifdef _SAMD21_
-                SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
-                REG_PM_SLEEP = PM_SLEEP_IDLE(0);
-            #endif
-            __WFI();
+                #endif
+                __WFI();
+                
+                /* Run event after wake up */
+                if (peventAfterWakeUp != nullptr) {peventAfterWakeUp();}
+            }
+            /* If no task is executed, CPU is going to idle mode.
+            * Wait for next interrupt (tick or some other interrupt) */
+            else
+            {
+                Sleep();
+            }
         }
     }
     
     
     TASK_struct* MTASK::CreateTask()
     {
-        /* m_pFirstTask is only a pointer and not a task structure */
-        if (m_pFirstTask == nullptr)
-        {
-            TASK_struct* NewTask = new TASK_struct;
-            m_pFirstTask = NewTask;
-            NewTask->pNextTask = nullptr;
-            return NewTask;
-        }
-    
-        for (TASK_struct* pTask = m_pFirstTask; pTask != nullptr; pTask = pTask->pNextTask)
-        {
-            if (pTask->pNextTask == nullptr)
-            {
-                TASK_struct* NewTask = new TASK_struct;
-                pTask->pNextTask = NewTask;
-                NewTask->pNextTask = nullptr;
-                return NewTask;
-            }
-        }
+        TASK_struct* psNewTask = new TASK_struct;
+        psNewTask->psParent = m_psLastTask;
+        m_psLastTask = psNewTask;
     }
     
     
     TASK_struct* MTASK::FindTask(FuncPtr_t pTaskFunc)
     {
-        for (TASK_struct* pTask = m_pFirstTask; pTask != nullptr; pTask = pTask->pNextTask)
+        for (TASK_struct* pTask = m_psLastTask; pTask != nullptr; pTask = pTask->psParent)
         {
             if (pTask->pTaskFunc == pTaskFunc) {return pTask;}
         }
@@ -149,19 +134,17 @@ namespace Core::Multitask
     
     void MTASK::DeleteTask(TASK_struct* pTask)
     {
-        /* m_pFirstTask is only a pointer and not a task structure */
-        if (m_pFirstTask == pTask)
+        if (m_psLastTask == pTask)
         {
-            m_pFirstTask = pTask->pNextTask;
+            m_psLastTask = pTask->psParent;
             delete pTask;
             return;
         }
-    
-        for (TASK_struct* pTaskTemp = m_pFirstTask; pTaskTemp != nullptr; pTaskTemp = pTaskTemp->pNextTask)
+        for (TASK_struct* pTaskTemp = m_psLastTask; pTaskTemp != nullptr; pTaskTemp = pTaskTemp->psParent)
         {
-            if (pTaskTemp->pNextTask == pTask)
+            if (pTaskTemp->psParent == pTask)
             {
-                pTaskTemp->pNextTask = pTask->pNextTask;
+                pTaskTemp->psParent = pTask->psParent;
                 delete pTask;
                 return;
             }
@@ -283,6 +266,41 @@ namespace Core::Multitask
             case TASK_EVENT_TYPE_AfterWakeUp:       peventAfterWakeUp = vCallBack; break;
         }
     }
+
+    
+    void MTASK::Sleep()
+    {
+        #ifdef _SAMC21_
+            REG_PM_SLEEPCFG = PM_SLEEPCFG_SLEEPMODE_IDLE0;
+        #endif
+        #ifdef _SAMD21_
+            SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
+            REG_PM_SLEEP = PM_SLEEP_IDLE(0);
+        #endif
+        __WFI();
+    }
+
+    void MTASK::Sleep(uint16_t unTimeout)
+    {
+        uint32_t unSysTimeMatch = m_unSysTime + unTimeout;
+        volatile uint32_t* unSysTimeActual = &m_unSysTime;
+
+        /* Wait until system time matches */
+        while(*unSysTimeActual < unSysTimeMatch)
+        {
+            #ifdef _SAMC21_
+                REG_PM_SLEEPCFG = PM_SLEEPCFG_SLEEPMODE_IDLE0;
+            #endif
+            #ifdef _SAMD21_
+                SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
+                REG_PM_SLEEP = PM_SLEEP_IDLE(0);
+            #endif
+            __WFI();
+
+            /* System time overflows */
+            if (*unSysTimeActual == 0) {unSysTimeMatch &= 0x7FFFFFFF;}
+        };
+    }
 }
 
 /************************************************************************/
@@ -357,10 +375,7 @@ int main(void)
     /* Enable micro trace buffer */
     InitTraceBuffer();
 #endif
-    
-    /* MAIN LOOP */
-    while (1)
-    {
-        Core::Multitask::MTASK::Schedule();
-    }
+
+    /* Main Loop */
+    Core::Multitask::MTASK::Schedule();
 }
