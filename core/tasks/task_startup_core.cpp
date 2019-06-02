@@ -2,7 +2,7 @@
  * task_startup_core.cpp
  *
  * Created: 28.4.2019 10:20:59
- * Revised: 5.5.2019
+ * Revised: 2.6.2019
  * Author: uidm2956
  * BOARD:
  *
@@ -11,15 +11,12 @@
  *************************************************************************/
 
 #include <core/core.h>
-
-
 using namespace Core::Drivers;
 using namespace Core::Extensions;
 using namespace Core::Modules;
 using namespace Core::Multitask;
 GENCLOCK cClockMain(0, CPU_FREQ, 1, GCLK_SOURCE_OSC8M);
-void taskCellTest();
-uint16_t res;
+
 
 void Core::Multitask::taskStartUpCore()
 {    
@@ -27,8 +24,6 @@ void Core::Multitask::taskStartUpCore()
     vin_off();
     low_power_on();
     REG_PORT_DIRSET0 = VOUT_EN_msk|VIN_EN_msk|LOW_POWER_msk;
-    
-    Core::Multitask::MTASK::EnableDeepSleep();
     
     /* ADC channels initialization */
     MUX::SetPinGroup(&PORTA, VCELL1_msk|VCELL2_msk|VCELL3_msk|VCELL4_msk|VCELL5_msk|VCELL6_msk|VCELL7_msk, VCELL1_pinmux);
@@ -47,45 +42,4 @@ void Core::Multitask::taskStartUpCore()
     
     /* Run application */
     MTASK::Run(taskStartUpApp);
-    
-    /* Tests */
-    MTASK::Repeat(taskCellTest, TASK_TOUT_MS(100));
-    SSD1306::Init();
-    SSD1306::On();    
-    //SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;", 0, 0, SSD1306_FONT_Small);
-    //SSD1306::Println((uint8_t*)"<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 0, SSD1306_FONT_Small);
-    //SSD1306::Println((uint8_t*)"[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", 3, 0, SSD1306_FONT_Small);
-    SSD1306::Println((uint8_t*)"!\"#$%&'()*+,-./0123456789:;",0,0,SSD1306_FONT_Large);
-    //SSD1306::WriteCmd(SSD1306_INVERTDISPLAY);
-}
-
-void taskCellTest()
-{
-    BATTERY_MANAGEMENT::MeasCells();
-    //BATTERY_MANAGEMENT::CheckCells();
-    res = BATTERY_MANAGEMENT::GetCellVoltage(1);
-    res = BATTERY_MANAGEMENT::GetCellVoltage(2);
-    res = BATTERY_MANAGEMENT::GetCellVoltage(3);
-    res = BATTERY_MANAGEMENT::GetCellVoltage(4);
-    res = BATTERY_MANAGEMENT::GetCellVoltage(5);
-    res = BATTERY_MANAGEMENT::GetCellVoltage(6);
-    res = BATTERY_MANAGEMENT::GetCellVoltage(7);
-}
-
-
-/************************************************************************/
-/* INTERRUPT HANDLERS                                                   */
-/************************************************************************/
-void EIC_Handler()
-{
-    if (REG_EIC_INTFLAG & (1<<BUTTON_LEFT_extint))
-    {
-        if(BUTTONS::GetEvent(BUTTONS_EVENT_PushEnter) != 0) {MTASK::Run((FuncPtr_t)BUTTONS::GetEvent(BUTTONS_EVENT_PushEnter));}
-    }
-    if (REG_EIC_INTFLAG & (1<<BUTTON_RIGHT_extint))
-    {
-        if(BUTTONS::GetEvent(BUTTONS_EVENT_PushNext) != 0) {MTASK::Run((FuncPtr_t)BUTTONS::GetEvent(BUTTONS_EVENT_PushNext));}
-    }
-    
-    EIC->INTFLAG.reg = 0xFFFFFFFF;      /* Clear flags */
 }
